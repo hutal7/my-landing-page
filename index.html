@@ -3,283 +3,384 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>박명숙 · 자기소개</title>
+  <title>박명숙 · AI 컨설턴트</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html {
+      font-size: 17px;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --dark-green:  #1e3a2f;
+      --mid-green:   #2d5240;
+      --cream:       #f7f4ee;
+      --white:       #fdfcfa;
+      --gold:        #c4a55a;
+      --gold-soft:   rgba(196,165,90,0.25);
+      --text-dark:   #1a2e22;
+      --text-mid:    #3d5a48;
+      --text-light:  #6b8c78;
+    }
+
     body {
-      font-family: 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;
-      background: linear-gradient(160deg, #ede7f6 0%, #e1d5f5 40%, #ead9f7 100%);
-      min-height: 100vh;
-      color: #243d26;
+      font-family: 'Apple SD Gothic Neo', '맑은 고딕', 'Malgun Gothic', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
       line-height: 1.75;
       overflow-x: hidden;
     }
 
-    /* ── 장식 꽃잎 ── */
-    .petals {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
+    /* ── 히어로 ── */
+    .hero {
+      background: linear-gradient(160deg, #162d22 0%, #2d5240 55%, #1e3a2f 100%);
+      padding: 5rem 1.5rem 4.5rem;
+      text-align: center;
+      position: relative;
       overflow: hidden;
     }
 
-    .petal {
+    .hero::before {
+      content: '';
       position: absolute;
-      opacity: 0.28;
-      animation: sway 7s ease-in-out infinite;
-      font-size: 1.3rem;
-      user-select: none;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
 
-    @keyframes sway {
-      0%,100% { transform: rotate(-8deg) scale(1);   }
-      50%      { transform: rotate( 8deg) scale(1.08); }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
     }
 
-    /* ── 레이아웃 ── */
-    .container {
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 25% 60%, rgba(196,165,90,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 40%, rgba(196,165,90,0.05) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 660px;
+      max-width: 580px;
       margin: 0 auto;
-      padding: 2.2rem 1.3rem 2.5rem;
     }
 
-    /* ── 프로필 카드 ── */
-    .card {
-      background: rgba(255, 255, 255, 0.84);
-      backdrop-filter: blur(8px);
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.65);
-      box-shadow: 0 6px 28px rgba(40,80,42,0.13);
-      padding: 2.2rem 2rem;
-      text-align: center;
-      margin-bottom: 1.4rem;
-    }
-
-    /* 원형 프로필 사진 */
     .profile-wrap {
-      width: 130px;
-      height: 130px;
-      margin: 0 auto 1.3rem;
+      width: 148px;
+      height: 148px;
       border-radius: 50%;
       overflow: hidden;
-      border: 3px solid #fff;
-      box-shadow: 0 4px 14px rgba(40,100,42,0.22), 0 0 0 1px rgba(200,200,200,0.3);
-      background: linear-gradient(135deg, #a8d8a8, #6dbf67);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.6rem;
+      margin: 0 auto 1.8rem;
+      border: 3px solid var(--gold);
+      box-shadow: 0 0 0 7px rgba(196,165,90,0.13), 0 10px 36px rgba(0,0,0,0.35);
       transform: translateZ(0);
       -webkit-mask-image: -webkit-radial-gradient(white, black);
     }
 
-    /* 프로필 사진이 있을 때: <img src="photo.jpg" alt="프로필"> 태그를 .profile-wrap 안에 넣으세요 */
     .profile-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center 5%;
+      filter: brightness(1.1);
       transform: translateZ(0);
-      image-rendering: -webkit-optimize-contrast;
-      filter: brightness(1.25);
     }
 
-    /* 이름 · 직책 · 소속 한 줄 */
-    .name-line {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #183319;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .hero-tags {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
       margin-bottom: 1.1rem;
+      flex-wrap: wrap;
     }
 
-    .name-tag {
+    .hero-tag {
       font-size: 0.7rem;
       font-weight: 700;
-      vertical-align: middle;
-      letter-spacing: 0.06em;
-      white-space: nowrap;
-      padding: 0.18rem 0.7rem;
-      margin-left: 0.3rem;
-    }
-
-    .name-tag.consultant {
-      color: #fff;
-      background: linear-gradient(135deg, #6a1b9a, #ab47bc);
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(106, 27, 154, 0.3);
-    }
-
-    .name-tag.instructor {
-      color: #fff;
-      background: linear-gradient(135deg, #6a1b9a, #ab47bc);
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(106, 27, 154, 0.3);
-    }
-
-    /* 자기소개 문장 */
-    .intro {
-      font-size: 0.96rem;
-      color: #1a1a1a;
-      line-height: 1.9;
-      text-align: left;
-      display: table;
-      margin: 0 auto;
-    }
-
-    /* ── 섹션 공통 ── */
-    .section { margin-bottom: 1.4rem; }
-
-    .section-heading {
-      font-size: 0.88rem;
-      font-weight: 700;
       letter-spacing: 0.1em;
-      color: #2e6e33;
-      margin-bottom: 0.85rem;
-      padding-left: 0.75rem;
-      border-left: 3px solid #68bb6c;
+      color: var(--gold);
+      border: 1px solid rgba(196,165,90,0.5);
+      border-radius: 4px;
+      padding: 0.18rem 0.72rem;
     }
 
-    /* ── 경력 구분 레이블 ── */
-    .career-period-label {
-      font-size: 0.8rem;
+    .hero-name {
+      font-size: 2.8rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
       color: #fff;
-      background: #2e7d32;
-      display: inline-block;
-      padding: 0.2rem 0.75rem;
-      border-radius: 8px;
-      margin-bottom: 0.55rem;
-      margin-top: 0.2rem;
-    }
-
-    /* ── 경력 카드 ── */
-    .career-card {
-      background: rgba(255,255,255,0.82);
-      border-radius: 15px;
-      border: 1px solid rgba(255,255,255,0.55);
-      box-shadow: 0 2px 14px rgba(40,80,42,0.08);
-      padding: 1rem 1.2rem;
+      letter-spacing: 0.06em;
       margin-bottom: 0.8rem;
     }
 
-    .career-title {
-      font-size: 0.94rem;
-      font-weight: 700;
-      color: #1a3c1c;
+    .gold-line {
+      width: 52px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0.9rem auto 1.1rem;
     }
 
-    .career-summary {
-      font-size: 0.84rem;
-      color: #5a7d5c;
-      margin-top: 0.2rem;
-    }
-
-    /* ── 취미 태그 ── */
-    .hobby-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .hobby-tag {
-      background: rgba(255,255,255,0.8);
-      border: 1px solid rgba(104,187,108,0.4);
-      color: #2a6830;
-      font-size: 0.84rem;
-      padding: 0.28rem 0.85rem;
-      border-radius: 20px;
-    }
-
-    /* ── 위트 문구 ── */
-    .quote-box {
-      background: linear-gradient(
-        135deg,
-        rgba(255,249,196,0.88) 0%,
-        rgba(252,224,236,0.80) 100%
-      );
-      border: 1px solid rgba(255,230,120,0.55);
-      border-radius: 18px;
-      padding: 1.3rem 1.6rem;
-      text-align: center;
-      margin-bottom: 1.4rem;
-      box-shadow: 0 3px 14px rgba(255,193,7,0.14);
-    }
-
-    .quote-mark {
-      font-size: 1.6rem;
-      line-height: 1;
-      color: #f9a825;
-    }
-
-    .quote-text {
-      font-size: 0.91rem;
+    .hero-slogan {
+      font-size: 0.98rem;
+      color: rgba(255,255,255,0.68);
       font-style: italic;
-      color: #4a3c18;
-      line-height: 1.8;
-      font-weight: 500;
+      letter-spacing: 0.04em;
     }
 
-    /* ── 버튼 ── */
+    /* ── 공통 섹션 ── */
+    .section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3.8rem 1.8rem;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      margin-bottom: 0.45rem;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--dark-green);
+      margin-bottom: 1.8rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid rgba(196,165,90,0.28);
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(196,165,90,0.2), transparent);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* ── 소개 ── */
+    .about-text {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 2;
+    }
+
+    /* ── 대상 ── */
+    .target-box {
+      background: var(--white);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 14px 14px 0;
+      padding: 1.5rem 1.8rem;
+      box-shadow: 0 3px 20px rgba(30,58,47,0.07);
+    }
+
+    .target-box strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark-green);
+      margin-bottom: 0.6rem;
+    }
+
+    .target-box p {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.85;
+    }
+
+    /* ── 타임라인 ── */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.5rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold), rgba(196,165,90,0.15));
+    }
+
+    .timeline-group { margin-bottom: 2rem; }
+    .timeline-group:last-child { margin-bottom: 0; }
+
+    .timeline-period {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 0.9rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.72rem;
+      top: 0.52rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 3px rgba(196,165,90,0.18);
+    }
+
+    .timeline-role {
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .timeline-group.past .timeline-role {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .timeline-org {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-top: 0.1rem;
+    }
+
+    /* ── 강점 카드 ── */
+    .strength-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+    }
+
+    .strength-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 1.8rem 1rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 22px rgba(30,58,47,0.08);
+      border-top: 2px solid var(--gold);
+      transition: transform 0.2s, box-shadow 0.2s;
+      overflow: hidden;
+    }
+
+    .strength-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(30,58,47,0.13);
+    }
+
+    .strength-icon {
+      font-size: 2.1rem;
+      display: block;
+      margin-bottom: 0.9rem;
+    }
+
+    .strength-headline {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--dark-green);
+      margin-bottom: 0.5rem;
+      line-height: 1.45;
+      word-break: keep-all;
+    }
+
+    .strength-desc {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      line-height: 1.65;
+      word-break: keep-all;
+    }
+
+    /* ── 연락처 ── */
+    .contact-section {
+      background: linear-gradient(160deg, #162d22 0%, #2d5240 100%);
+      padding: 4rem 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .contact-lead {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 2.2rem;
+      letter-spacing: 0.03em;
+    }
+
     .btn-group {
       display: flex;
+      justify-content: center;
       gap: 0.9rem;
-      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
     }
 
     .btn {
-      flex: 1;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 0.45rem;
-      padding: 0.9rem 1rem;
-      border-radius: 15px;
-      font-size: 0.95rem;
-      font-weight: 700;
+      padding: 0.88rem 1.6rem;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
       cursor: pointer;
       border: none;
       text-decoration: none;
-      transition: transform 0.13s, box-shadow 0.13s;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
+      transition: transform 0.15s, box-shadow 0.15s;
+      font-family: inherit;
     }
 
     .btn:hover  { transform: translateY(-2px); }
-    .btn:active { transform: scale(0.96); }
+    .btn:active { transform: scale(0.97); }
 
-    .btn-email {
-      background: linear-gradient(135deg, #2e7d32, #43a047);
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(46,125,50,0.38);
+    .btn-gold {
+      background: linear-gradient(135deg, #b8960c, #d4b870);
+      color: #1a2e22;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(196,165,90,0.35);
     }
 
-    .btn-phone {
-      background: linear-gradient(135deg, #c2185b, #e91e63);
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(194,24,91,0.32);
+    .btn-outline {
+      background: transparent;
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(196,165,90,0.55);
     }
 
-    .btn-blog {
-      background: linear-gradient(135deg, #03c75a, #02a44a);
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(3,199,90,0.32);
+    .btn-outline:hover {
+      background: rgba(196,165,90,0.1);
     }
 
-    /* ── 토스트 알림 ── */
+    .btn-outline:disabled,
+    .btn-disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Toast */
     .toast {
       position: fixed;
       bottom: 1.8rem;
       left: 50%;
       transform: translateX(-50%) translateY(18px);
-      background: #1a3c1c;
+      background: var(--dark-green);
       color: #fff;
       padding: 0.6rem 1.6rem;
       border-radius: 22px;
@@ -289,6 +390,7 @@
       pointer-events: none;
       z-index: 200;
       white-space: nowrap;
+      border: 1px solid rgba(196,165,90,0.4);
     }
 
     .toast.show {
@@ -296,159 +398,174 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* ── 푸터 ── */
+    /* Footer */
     .footer {
+      background: #101e16;
       text-align: center;
-      font-size: 0.76rem;
-      color: #7a9e7c;
+      padding: 1.3rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.28);
     }
 
     /* ── 반응형 ── */
-    @media (max-width: 440px) {
-      .name-line {
-        font-size: 1.2rem;
-        white-space: normal;
-        line-height: 1.45;
-      }
-      .btn-group { flex-direction: column; }
-      .card { padding: 1.6rem 1.2rem; }
+    @media (max-width: 560px) {
+      .hero { padding: 3.5rem 1.2rem 3rem; }
+      .hero-name { font-size: 2rem; }
+      .hero-slogan { font-size: 0.9rem; }
+      .section { padding: 2.8rem 1.2rem; }
+      .section-title { font-size: 1.2rem; }
+      .strength-grid { grid-template-columns: 1fr; gap: 0.85rem; }
+      .strength-card { padding: 1.4rem 1rem 1.2rem; }
+      .strength-headline { font-size: 0.95rem; }
+      .strength-desc { font-size: 0.82rem; }
+      .btn-group { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 300px; justify-content: center; }
+      .contact-section { padding: 3rem 1.2rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- 장식 꽃잎 + 잎사귀 -->
-  <div class="petals" aria-hidden="true">
-    <!-- 꽃 (크게) -->
-    <span class="petal" style="top:3%;  left:5%;  color:#f9c74f; animation-delay:0s;   font-size:2.4rem;">✿</span>
-    <span class="petal" style="top:6%;  left:86%; color:#ffb3c6; animation-delay:1.2s; font-size:2.0rem;">❀</span>
-    <span class="petal" style="top:19%; left:1%;  color:#ffb3c6; animation-delay:2.1s; font-size:1.8rem;">✾</span>
-    <span class="petal" style="top:27%; left:90%; color:#f9c74f; animation-delay:0.6s; font-size:2.2rem;">✿</span>
-    <span class="petal" style="top:44%; left:3%;  color:#f9c74f; animation-delay:1.8s; font-size:2.0rem;">❀</span>
-    <span class="petal" style="top:54%; left:92%; color:#ffb3c6; animation-delay:0.3s; font-size:1.9rem;">✿</span>
-    <span class="petal" style="top:66%; left:7%;  color:#ffb3c6; animation-delay:2.7s; font-size:2.3rem;">✾</span>
-    <span class="petal" style="top:77%; left:87%; color:#f9c74f; animation-delay:1.5s; font-size:2.0rem;">❀</span>
-    <span class="petal" style="top:87%; left:13%; color:#f9c74f; animation-delay:0.9s; font-size:2.1rem;">✿</span>
-    <span class="petal" style="top:93%; left:79%; color:#ffb3c6; animation-delay:2.4s; font-size:1.8rem;">✾</span>
-    <!-- 잎사귀 -->
-    <span class="petal" style="top:13%; left:93%; color:#4caf7d; animation-delay:1.0s; font-size:2.2rem;">🌿</span>
-    <span class="petal" style="top:50%; left:1%;  color:#43a868; animation-delay:2.0s; font-size:2.4rem;">🍃</span>
-    <span class="petal" style="top:75%; left:91%; color:#388e5a; animation-delay:0.5s; font-size:2.0rem;">🌿</span>
+  <!-- ── 히어로 ── -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+
+      <div class="profile-wrap">
+        <img src="pms.jpg" alt="박명숙 프로필 사진">
+      </div>
+
+      <div class="hero-tags">
+        <span class="hero-tag">AI 컨설턴트</span>
+        <span class="hero-tag">AI 강사</span>
+      </div>
+
+      <h1 class="hero-name">박명숙</h1>
+      <div class="gold-line"></div>
+      <p class="hero-slogan">"배우면서 돕고, 나누면서 성장합니다"</p>
+
+    </div>
+  </section>
+
+  <!-- ── 나는 누구인가 ── -->
+  <div class="section">
+    <div class="section-label">소개</div>
+    <h2 class="section-title">나는 누구인가</h2>
+    <p class="about-text">
+      20년 교육 현장 경험을 바탕으로 AI를 공부하고 있습니다.<br>
+      거창한 이론보다 현장에서 함께 고민하는 컨설턴트가 되고 싶습니다.<br>
+      배움과 나눔, 두 가지를 멈추지 않는 것이 저의 가장 큰 자부심입니다.
+    </p>
   </div>
 
-  <div class="container">
+  <div class="divider"></div>
 
-    <!-- ── 프로필 카드 ── -->
-    <div class="card">
-      <!--
-        프로필 사진을 사용하려면 아래 div 안의 🌿 이모지를 지우고
-        <img src="사진파일명.jpg" alt="프로필 사진"> 으로 교체하세요.
-      -->
-      <div class="profile-wrap"><img src="pms.jpg" alt="프로필 사진"></div>
-
-      <div class="name-line">박명숙 <span class="name-tag consultant">AI 컨설턴트</span><span class="name-tag instructor">AI 강사</span></div>
-
-      <p class="intro">
-        배움과 나눔, 두 가지를 멈추지 않는 것이 저의 큰 자부심입니다.<br>
-        사람과 기술을 잇는 AI 컨설턴트로서 현장의 변화를 이끌겠습니다.<br>
-        어제보다 오늘이, 오늘보다 내일이 더 기대됩니다. <span style="font-size:1.1rem;">🌱</span>
-      </p>
+  <!-- ── 이런 분께 도움드려요 ── -->
+  <div class="section">
+    <div class="section-label">대상</div>
+    <h2 class="section-title">이런 분께 도움드려요</h2>
+    <div class="target-box">
+      <strong>AI가 낯설고 막막한 기업 · 기관 · 개인</strong>
+      <p>어디서부터 시작해야 할지 모르겠다면, 함께 첫걸음을 내딛겠습니다.<br>
+      현장에서 직접 쓸 수 있는 AI 활용법을 같이 찾아드립니다.</p>
     </div>
+  </div>
 
-    <!-- ── 주요 경력 ── -->
-    <div class="section">
-      <div class="section-heading">주요 경력</div>
+  <div class="divider"></div>
 
-      <div class="career-period-label">현재</div>
-      <div class="career-card">
-        <div>
-          <div class="career-title">AI 컨설턴트  <span style="font-size:0.85rem;">(주)상상우리</span></div>
-          <div class="career-summary">AI 컨설팅 전문 교육 수료 · 새로운 분야로의 힘찬 첫걸음</div>
+  <!-- ── 주요 경력 ── -->
+  <div class="section">
+    <div class="section-label">경력</div>
+    <h2 class="section-title">주요 경력</h2>
+    <div class="timeline">
+
+      <div class="timeline-group">
+        <div class="timeline-period">현재</div>
+        <div class="timeline-item">
+          <div class="timeline-role">AI 컨설턴트</div>
+          <div class="timeline-org">(주)상상우리</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-role">AI 강사</div>
+          <div class="timeline-org">(주)상상우리</div>
         </div>
       </div>
 
-      <div class="career-card">
-        <div>
-          <div class="career-title">AI 강사  <span style="font-size:0.85rem;">(주)상상우리</span></div>
-          <div class="career-summary">AI 활용 교육 강의 · 기술과 사람을 연결하는 현장 교육</div>
+      <div class="timeline-group past">
+        <div class="timeline-period">과거</div>
+        <div class="timeline-item">
+          <div class="timeline-role">영어강사</div>
         </div>
-      </div>
-
-      <div class="career-period-label">과거</div>
-      <div class="career-card">
-        <div>
-          <div class="career-title">영어강사</div>
-          <div class="career-summary">교육 현장에서 다양한 학습자와 함께한 영어 강의 활동</div>
+        <div class="timeline-item">
+          <div class="timeline-role">방과후 코디네이터</div>
         </div>
-      </div>
-
-      <div class="career-card">
-        <div>
-          <div class="career-title">방과후 코디네이터</div>
-          <div class="career-summary">학교 방과후 프로그램 기획·운영 및 강사 연결</div>
-        </div>
-      </div>
-
-      <div class="career-card">
-        <div>
-          <div class="career-title">학생 집단상담사</div>
-          <div class="career-summary">학생 집단 상담 활동 · 마음과 마음이 연결되는 자리를 만들다</div>
+        <div class="timeline-item">
+          <div class="timeline-role">학생 집단상담사</div>
         </div>
       </div>
 
     </div>
+  </div>
 
-    <!-- ── 취미 ── -->
-    <div class="section">
-      <div class="section-heading">취미 · 여가</div>
-      <div class="hobby-list">
-        <span class="hobby-tag">🎨 연필 · 색연필 드로잉</span>
-        <span class="hobby-tag">🎸 클래식 기타</span>
-        <span class="hobby-tag">🏓 탁구</span>
-        <span class="hobby-tag">🥾 트래킹</span>
+  <div class="divider"></div>
+
+  <!-- ── 나의 강점 ── -->
+  <div class="section">
+    <div class="section-label">강점</div>
+    <h2 class="section-title">나의 강점</h2>
+    <div class="strength-grid">
+
+      <div class="strength-card">
+        <span class="strength-icon">🏫</span>
+        <div class="strength-headline">20년 교육 현장 경험</div>
+        <div class="strength-desc">누구보다 현장을 잘 압니다</div>
       </div>
+
+      <div class="strength-card">
+        <span class="strength-icon">🤖</span>
+        <div class="strength-headline">AI를 배우며 직접 실천 중</div>
+        <div class="strength-desc">함께 배우고 성장하는 컨설턴트</div>
+      </div>
+
+      <div class="strength-card">
+        <span class="strength-icon">🤝</span>
+        <div class="strength-headline">사람 중심 소통</div>
+        <div class="strength-desc">기술보다 사람을 먼저 봅니다</div>
+      </div>
+
     </div>
+  </div>
 
-
-    <!-- ── 연락처 버튼 ── -->
+  <!-- ── 연락처 ── -->
+  <section class="contact-section">
+    <p class="contact-lead">함께 시작해 보실까요?</p>
     <div class="btn-group">
-      <a class="btn btn-email" href="mailto:hutal135@gmail.com">
-        ✉️&nbsp; 이메일 보내기
-      </a>
-      <button class="btn btn-phone" onclick="copyPhone()">
-        📞&nbsp; 전화 걸기
-      </button>
-      <span class="btn btn-blog">
-        📝&nbsp; 네이버 블로그
-      </span>
+      <a class="btn btn-gold" href="mailto:hutal135@gmail.com">✉️ 이메일 보내기</a>
+      <button class="btn btn-outline" onclick="copyPhone()">📞 전화 걸기</button>
+      <button class="btn btn-outline btn-disabled" disabled>📝 네이버 블로그</button>
     </div>
+  </section>
 
-    <div class="footer">© 2026 박명숙</div>
-  </div>
+  <div class="footer">© 2026 박명숙 · AI 컨설턴트</div>
 
-  <!-- 토스트 메시지 -->
   <div class="toast" id="toast"></div>
 
   <script>
     var PHONE = '010-2279-6933';
-
     function copyPhone() {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(PHONE).then(showToast);
       } else {
         var el = document.createElement('textarea');
         el.value = PHONE;
-        el.style.position = 'fixed';
-        el.style.opacity = '0';
+        el.style.cssText = 'position:fixed;opacity:0';
         document.body.appendChild(el);
-        el.focus();
         el.select();
         document.execCommand('copy');
         document.body.removeChild(el);
         showToast();
       }
     }
-
     function showToast() {
       var t = document.getElementById('toast');
       t.textContent = '전화번호가 클립보드에 복사되었습니다 📋';
