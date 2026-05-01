@@ -11,3 +11,6 @@ Thumbs.db
 
 # Playwright 임시 파일
 .playwright-mcp/
+
+# Claude Code 설정
+.claude/
